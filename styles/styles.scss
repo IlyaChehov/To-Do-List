@@ -1,0 +1,141 @@
+@import "blocks/reset", "blocks/globals";
+
+.task {
+  border: 3px solid white;
+  border-radius: 10px;
+  padding: 30px;
+  backdrop-filter: blur(5px);
+  max-inline-size: 700px;
+  inline-size: 100%;
+
+  &__title {
+    margin-block-end: 20px;
+    font-weight: 400;
+    font-size: 50px;
+    text-align: center;
+
+    &-accent {
+      color: darkorange;
+      font-style: italic;
+    }
+  }
+
+  &-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 30px;
+
+    &__input {
+      flex-grow: 1;
+      border: 2px solid white;
+      border-radius: 15px;
+      padding: 5px;
+      padding-inline-start: 15px;
+      color: white;
+      font-size: 18px;
+      background-color: transparent;
+      transition: border-color 0.2s;
+      block-size: 40px;
+
+      &::placeholder {
+        opacity: 0.5;
+        color: white;
+        font-size: 18px;
+      }
+
+      &:focus-visible {
+        border-color: darkorange;
+        outline: none;
+      }
+    }
+
+    &__button-add {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid white;
+      border-radius: 15px;
+      padding: 10px;
+      transition: border-color 0.2s;
+      block-size: 40px;
+
+      &:hover {
+        border-color: darkorange;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    max-block-size: 400px;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      border: 2px solid white;
+      block-size: 40px;
+      padding-inline: 15px;
+      border-radius: 10px;
+      gap: 10px;
+
+      &.done {
+        opacity: 0.5;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inline-size: 95%;
+          transform: translateX(-50%);
+          block-size: 2px;
+          left: 50%;
+          top: 50%;
+          background-color: #fff;
+        }
+      }
+
+      &.pinned {
+        border-color: yellow;
+      }
+    }
+
+    &__buttons {
+      margin-inline-start: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &__button-done,
+    &__button-pinned,
+    &__button-delete {
+      color: white;
+      block-size: 25px;
+      inline-size: 25px;
+      transition: color 0.2s, fill 0.2s;
+    }
+    &__button-done {
+      &:hover {
+        color: green;
+      }
+    }
+
+    &__button-pinned {
+      &.active,
+      &:hover {
+        color: yellow;
+        fill: yellow;
+      }
+    }
+
+    &__button-delete {
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

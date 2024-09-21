@@ -1,0 +1,24 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
+  & svg {
+    pointer-events: none;
+  }
+}
