@@ -26,6 +26,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   color: white;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -103,7 +104,7 @@ body {
 .task__list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   overflow-y: auto;
   max-block-size: 400px;
 }
@@ -148,10 +149,15 @@ body {
 .task__list__button-done:hover {
   color: green;
 }
-.task__list__button-pinned.active, .task__list__button-pinned:hover {
+.task__list__button-pinned:hover {
   color: yellow;
   fill: yellow;
 }
 .task__list__button-delete:hover {
   color: red;
+}
+
+.task__list-item.pinned .task__list__button-pinned {
+  color: yellow;
+  fill: yellow;
 }/*# sourceMappingURL=styles.css.map */

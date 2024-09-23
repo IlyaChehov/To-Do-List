@@ -1,4 +1,6 @@
-@import "blocks/reset", "blocks/globals";
+@import 
+  "blocks/reset", 
+  "blocks/globals";
 
 .task {
   border: 3px solid white;
@@ -69,7 +71,7 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     overflow-y: auto;
     max-block-size: 400px;
 
@@ -125,7 +127,6 @@
     }
 
     &__button-pinned {
-      &.active,
       &:hover {
         color: yellow;
         fill: yellow;
@@ -137,5 +138,12 @@
         color: red;
       }
     }
+  }
+}
+
+.task__list-item.pinned {
+  .task__list__button-pinned {
+    color: yellow;
+    fill: yellow;
   }
 }
