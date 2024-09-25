@@ -1,4 +1,5 @@
-import {doneIcon, pinnedIcon, deleteIcon} from './icon.js'
+import {getToLocalStorage, setToLocalStorage} from './localStorage.js';
+import {updateListTasks} from './utils.js';
 
 const form = document.querySelector('.task-form');
 const inputForm = document.querySelector('.task-form__input');
@@ -9,9 +10,9 @@ updateListTasks();
 form.addEventListener('submit', addInputValue);
 
 taskContainer.addEventListener('click', (event) => {
-  const parendNodeButtons = event.target.closest('.task__list__buttons');
+  const parentNodeButtons = event.target.closest('.task__list__buttons');
 
-  if (!parendNodeButtons) return;
+  if (!parentNodeButtons) return;
   
   if (event.target.classList.contains('task__list__button-done')) {
     doneTask(event);
@@ -46,52 +47,9 @@ function addInputValue (event) {
   form.reset();
 };
 
-function getToLocalStorage () {
-  const taskLocalStorage = localStorage.getItem('task');
-  return taskLocalStorage ? JSON.parse(taskLocalStorage) : [];
-};
-
-function setToLocalStorage (tasks) {
-  return localStorage.setItem('task', JSON.stringify(tasks));
-};
-
-function updateListTasks() {
-  taskContainer.textContent = '';
-  const taskLocalStorage = getToLocalStorage();
-  renderTasks(taskLocalStorage);
-};
-
-function renderTasks (tasks) {
-  tasks.sort((a, b) => {
-    if (a.done !== b.done) {
-      return b.done ? -1 : 1
-    };
-    if (a.pinned !== b.pinned) {
-      return a.pinned ? -1 : 1;
-    }
-  }).forEach((elementTasks, index) => {
-    const {id, task, done, pinned} = elementTasks;
-
-    const elementHTML = 
-    `
-      <li class="task__list-item ${done ? 'done' : ''} ${pinned ? 'pinned' : ''}" data-id="${id}">
-        <span class="task__list-numbering">${index + 1}.</span>
-        <p class="task__list-text">${task}</p>
-        <div class="task__list__buttons">
-          <button class="button task__list__button-done">${doneIcon}</button>
-          <button class="button task__list__button-pinned">${pinnedIcon}</button>
-          <button class="button task__list__button-delete">${deleteIcon}</button>
-        </div>
-      </li>
-    `
-
-    taskContainer.insertAdjacentHTML('beforeend', elementHTML);
-  })
-};
-
 function doneTask(event) {
-  const parendNode = event.target.closest('.task__list-item');
-  const taskId = Number(parendNode.dataset.id);
+  const parentNode = event.target.closest('.task__list-item');
+  const taskId = Number(parentNode.dataset.id);
   const arrayTasks = getToLocalStorage();
 
   const index = arrayTasks.findIndex((task) => task.id === taskId);
@@ -109,8 +67,8 @@ function doneTask(event) {
 };
 
 function pinnedTask(event) {
-  const parendNode = event.target.closest('.task__list-item');
-  const taskId = Number(parendNode.dataset.id);
+  const parentNode = event.target.closest('.task__list-item');
+  const taskId = Number(parentNode.dataset.id);
   const arrayTasks = getToLocalStorage();
 
   const index = arrayTasks.findIndex((task) => task.id === taskId);
@@ -132,8 +90,8 @@ function pinnedTask(event) {
 };
 
 function deleteTask(event) {
-  const parendNode = event.target.closest('.task__list-item');
-  const taskId = Number(parendNode.dataset.id);
+  const parentNode = event.target.closest('.task__list-item');
+  const taskId = Number(parentNode.dataset.id);
   let arrayTasks = getToLocalStorage();
  
   arrayTasks = arrayTasks.filter((task) => task.id !== taskId);
